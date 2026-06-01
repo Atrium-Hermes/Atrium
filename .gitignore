@@ -55,7 +55,10 @@ tmp/
 
 # Foundry deps (installed via `forge install`) — anchor to repo root so it does
 # not also swallow workspace source dirs like indexer/src/lib or cli/src/lib.
-/lib/
+/lib/*
+# ...but forge-std is committed as a git submodule (see .gitmodules); keep its
+# gitlink tracked so CI's `submodules: recursive` checkout can restore it.
+!/lib/forge-std
 
 # Local reference media
 *.mp4
