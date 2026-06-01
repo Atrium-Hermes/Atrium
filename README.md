@@ -1,6 +1,6 @@
 # ◆ Atrium
 
-[![CI](https://github.com/Atrium-Hermes/Hermes-Atrium/actions/workflows/ci.yml/badge.svg)](https://github.com/Atrium-Hermes/Hermes-Atrium/actions/workflows/ci.yml)
+[![CI](https://github.com/Atrium-Hermes/Atrium/actions/workflows/ci.yml/badge.svg)](https://github.com/Atrium-Hermes/Atrium/actions/workflows/ci.yml)
 
 > Skill provenance & royalty marketplace for AI agents.
 > Hermes generates skills. Atrium gives them an economy.
@@ -132,8 +132,8 @@ atrium/
 
 ```bash
 # 1. Clone and install
-git clone --recurse-submodules https://github.com/Atrium-Hermes/Hermes-Atrium
-cd Hermes-Atrium
+git clone --recurse-submodules https://github.com/Atrium-Hermes/Atrium
+cd Atrium
 cd cli && npm install && npm run build && cd ..
 cd mcp-server && npm install && npm run build && cd ..
 

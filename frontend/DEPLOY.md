@@ -13,7 +13,7 @@ empty. See "Indexer (data source)" below.
 
 ## Option A — Vercel dashboard (recommended, persistent GitHub deploys)
 
-1. https://vercel.com/new → **Import** `Atrium-Hermes/Hermes-Atrium`.
+1. https://vercel.com/new → **Import** `Atrium-Hermes/Atrium`.
 2. **Root Directory:** set to `frontend`. (Vercel then auto-detects Next.js,
    `npm install`, `next build`.)
 3. **Environment Variables** — add the ones below.

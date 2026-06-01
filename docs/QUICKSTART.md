@@ -13,8 +13,8 @@ Five minutes from zero to your first published and paid skill.
 ## 1. Installation
 
 ```bash
-git clone --recurse-submodules https://github.com/Atrium-Hermes/Hermes-Atrium
-cd Hermes-Atrium
+git clone --recurse-submodules https://github.com/Atrium-Hermes/Atrium
+cd Atrium
 
 # Install CLI
 cd cli && npm install && npm run build
