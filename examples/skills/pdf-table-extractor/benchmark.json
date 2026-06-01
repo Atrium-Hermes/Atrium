@@ -1,0 +1,55 @@
+{
+  "version": "0.1",
+  "test_cases": [
+    {
+      "id": "simple-grid",
+      "input": {
+        "pdf_url": "ipfs://bafkreih_test_simple_grid_pdf",
+        "page_range": "1"
+      },
+      "expected_output_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tolerance": "exact",
+      "weight": 1.0
+    },
+    {
+      "id": "multi-page-table",
+      "input": {
+        "pdf_url": "ipfs://bafkreij_test_multipage_pdf",
+        "page_range": "all"
+      },
+      "expected_output_hash": "sha256:7d865e959b2466918c9863afca942d0fb89d7c9ac0c99bafc3749504ded97730",
+      "tolerance": "fuzzy:0.95",
+      "weight": 2.0
+    },
+    {
+      "id": "scanned-noisy",
+      "input": {
+        "pdf_url": "ipfs://bafkreik_test_scanned_pdf",
+        "page_range": "1-3"
+      },
+      "expected_output_hash": "sha256:9c56cc51b374c3ba189210d5b6d4bf57790d351c96c47c02190ecf1e430635ab",
+      "tolerance": "fuzzy:0.85",
+      "weight": 1.5
+    },
+    {
+      "id": "rotated-landscape",
+      "input": {
+        "pdf_url": "ipfs://bafkreil_test_rotated_pdf",
+        "page_range": "5"
+      },
+      "expected_output_hash": "sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "tolerance": "fuzzy:0.90",
+      "weight": 1.5
+    },
+    {
+      "id": "empty-vs-zero",
+      "input": {
+        "pdf_url": "ipfs://bafkreim_test_empty_zero_pdf",
+        "page_range": "1-2"
+      },
+      "expected_output_hash": "sha256:6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "tolerance": "exact",
+      "weight": 1.0
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@atrium/key-service",
+  "version": "0.1.0",
+  "description": "Atrium decryption gatekeeper — releases a skill's content key only to addresses that have paid (invokeSkill) on-chain",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.0",
+    "dotenv": "^16.4.5",
+    "hono": "^4.6.0",
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  },
+  "engines": { "node": ">=20" }
+}

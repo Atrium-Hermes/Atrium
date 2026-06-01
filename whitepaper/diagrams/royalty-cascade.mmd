@@ -1,0 +1,14 @@
+flowchart LR
+  subgraph Chain["Derivation chain A → B → C"]
+    A["Skill A<br/>creator: Carol"]
+    B["Skill B<br/>creator: Alice<br/>parent: A @ 20%"]
+    CC["Skill C<br/>creator: Dave<br/>parent: B @ 15%"]
+    A -. derived .-> B
+    B -. derived .-> CC
+  end
+
+  INV["invoke(C), price P"] --> CC
+  CC -->|"protocol fee 2.5%"| FEE["Treasury"]
+  CC -->|"15% of net"| ALICE["Alice (B)"]
+  CC -->|"remainder"| DAVE["Dave (C)"]
+  CC -. "Carol (A) earns 0 unless<br/>Dave declares A as a parent" .-> CAROL["Carol (A)"]

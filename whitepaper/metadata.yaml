@@ -1,0 +1,35 @@
+---
+title: "Atrium: A Skill Provenance and Royalty Marketplace for AI Agents"
+subtitle: "Cryptographic authorship, content addressing, and per-invocation settlement on Base"
+author:
+  - The Atrium Authors
+date: "Version 0.1 — May 2026"
+abstract: |
+  AI agent runtimes increasingly generate reusable *skills* — self-contained,
+  executable capabilities expressed as Markdown with structured metadata. Today
+  these skills are trapped inside the runtime that produced them: there is no
+  portable record of who authored a skill, no way to verify what a consumer is
+  about to run, and no mechanism to compensate authors when their work is reused.
+  Atrium is an economic and identity layer that addresses these gaps without
+  becoming another agent runtime. Each skill is signed with a decentralized
+  identifier, content-addressed on IPFS, and priced for per-invocation use; a
+  small non-upgradeable smart contract on Base routes USDC payments to creators
+  and, for derived skills, to declared ancestors. This paper specifies the skill
+  manifest format, the on-chain settlement contract and its conservation
+  invariants, the royalty model, the threat model, and the off-chain indexing and
+  interface architecture. It argues that a tokenless, per-invocation design is the
+  right primitive for an emerging skill economy, and situates Atrium against
+  package registries, model hubs, and centralized app stores.
+keywords: [AI agents, skills, provenance, royalties, IPFS, DID, Base, USDC, MCP]
+lang: en
+geometry: "a4paper, margin=1in"
+fontsize: 11pt
+linkcolor: "Maroon"
+urlcolor: "MidnightBlue"
+toc: true
+toc-depth: 2
+numbersections: true
+secnumdepth: 2
+bibliography: refs.bib
+link-citations: true
+...

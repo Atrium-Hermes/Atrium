@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel superseded runs on the same ref to save minutes.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contracts:
+    name: Contracts (forge test)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive # lib/forge-std is a submodule
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - name: forge build
+        run: forge build --sizes
+      - name: forge test
+        # Tests live in scripts/ (AtriumRegistry.t.sol), not the default test/ dir.
+        run: FOUNDRY_TEST=scripts forge test -vv
+
+  node:
+    name: Node workspaces (cli + mcp-server + indexer)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - name: Build all workspaces (tsc)
+        run: npm run build
+
+  frontend:
+    name: Frontend (typecheck + next build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - name: next build
+        # Public config is read at runtime; provide placeholders so the build
+        # (which would also catch any untracked imported module) completes.
+        env:
+          NEXT_PUBLIC_INDEXER_URL: http://localhost:3001
+          NEXT_PUBLIC_REGISTRY_ADDRESS: "0x0000000000000000000000000000000000000000"
+          NEXT_PUBLIC_USDC_ADDRESS: "0x0000000000000000000000000000000000000000"
+          NEXT_PUBLIC_CHAIN_ID: "84532"
+          NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: "00000000000000000000000000000000"
+        run: npm run build
+
+  plugin:
+    name: Hermes plugin (pytest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: plugins/hermes
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e ".[dev]"
+      - run: pytest -q

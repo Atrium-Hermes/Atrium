@@ -1,0 +1,35 @@
+{
+  "name": "@atrium/indexer",
+  "version": "0.1.0",
+  "description": "Atrium indexer — mirrors AtriumRegistry events into SQLite and serves a read-only REST API",
+  "type": "module",
+  "bin": {
+    "atrium-indexer": "./dist/server.js"
+  },
+  "scripts": {
+    "build": "tsc && cp src/db/schema.sql dist/db/schema.sql",
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.0",
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "gray-matter": "^4.0.3",
+    "hono": "^4.6.0",
+    "p-queue": "^8.0.1",
+    "pino": "^9.4.0",
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^22.5.0",
+    "pino-pretty": "^11.2.2",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,72 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+out/
+cache/
+*.tsbuildinfo
+
+# Foundry
+broadcast/
+cache_forge/
+
+# Env / secrets — NEVER COMMIT
+.env
+.env.local
+.env.*.local
+*.private
+*-private.json
+secrets/
+
+# Local identity (Atrium-specific)
+.atrium/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/settings.json.example
+!.vscode/extensions.json
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+coverage/
+.nyc_output/
+*.lcov
+
+# Temporary files
+tmp/
+.tmp/
+*.tmp
+*.bak
+
+# Foundry deps (installed via `forge install`) — anchor to repo root so it does
+# not also swallow workspace source dirs like indexer/src/lib or cli/src/lib.
+/lib/
+
+# Local reference media
+*.mp4
+
+# Local-only assets / scratch (kept on disk, never part of the public repo)
+x-assets/
+hero-loop-preview.png
+/image*.jpg
+/image*.png
+/Screenshot*.png
+
+# Internal agent/project notes (kept local, not for the public repo)
+/CLAUDE.md
+/MEMORY.md

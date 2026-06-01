@@ -1,0 +1,42 @@
+{
+  "name": "atrium",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Skill provenance & royalty marketplace for AI agents",
+  "workspaces": [
+    "cli",
+    "mcp-server",
+    "indexer"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "build:indexer": "npm run build --workspace @atrium/indexer",
+    "start:indexer": "node indexer/dist/server.js",
+    "build:contracts": "forge build",
+    "test:contracts": "forge test -vv",
+    "test:contracts:gas": "forge test --gas-report",
+    "deploy:sepolia": "forge script scripts/DeployAtrium.s.sol --rpc-url base_sepolia --broadcast --verify",
+    "deploy:mainnet": "forge script scripts/DeployAtrium.s.sol --rpc-url base --broadcast --verify",
+    "fmt:contracts": "forge fmt",
+    "clean": "rm -rf out cache cli/dist mcp-server/dist && npm run clean --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Atrium-Hermes/Hermes-Atrium.git"
+  },
+  "keywords": [
+    "ai-agents",
+    "mcp",
+    "skills",
+    "base",
+    "ipfs",
+    "did",
+    "hermes-agent",
+    "openclaude",
+    "marketplace"
+  ]
+}

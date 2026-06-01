@@ -1,0 +1,27 @@
+{
+  "name": "@atrium/mcp-server",
+  "version": "0.1.0",
+  "description": "Atrium MCP server — exposes skill marketplace to AI agents",
+  "type": "module",
+  "bin": {
+    "atrium-mcp": "./dist/server.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/server.ts",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^16.4.5",
+    "viem": "^2.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

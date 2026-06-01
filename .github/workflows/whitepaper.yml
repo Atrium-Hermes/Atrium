@@ -1,0 +1,61 @@
+name: Whitepaper
+
+# Heavy (TeX Live + headless Chromium), so this does not run on every push.
+# It builds when the whitepaper sources change on main, or on manual dispatch.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "whitepaper/**"
+      - ".github/workflows/whitepaper.yml"
+  workflow_dispatch:
+
+jobs:
+  build-pdf:
+    name: Build atrium-whitepaper.pdf
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+
+      - name: Install TeX Live (xelatex) + fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-xetex texlive-fonts-recommended texlive-latex-recommended \
+            texlive-latex-extra lmodern fonts-dejavu
+
+      - name: Install Mermaid CLI + headless Chrome deps
+        run: |
+          sudo apt-get install -y --no-install-recommends \
+            libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 \
+            libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 \
+            libgbm1 libpango-1.0-0 libcairo2 libasound2t64 || \
+          sudo apt-get install -y --no-install-recommends libasound2
+          npm install -g @mermaid-js/mermaid-cli
+          # mermaid-cli bundles puppeteer; make sure its Chrome is present.
+          npx puppeteer browsers install chrome || true
+
+      - name: Build PDF
+        working-directory: whitepaper
+        env:
+          # Chromium cannot use its sandbox inside the runner.
+          PUPPETEER_CONFIG: ${{ github.workspace }}/whitepaper/puppeteer-ci.json
+        run: |
+          echo '{"args":["--no-sandbox","--disable-setuid-sandbox"]}' > puppeteer-ci.json
+          chmod +x build.sh
+          ./build.sh
+          ls -la atrium-whitepaper.pdf
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: atrium-whitepaper
+          path: whitepaper/atrium-whitepaper.pdf
+          if-no-files-found: error

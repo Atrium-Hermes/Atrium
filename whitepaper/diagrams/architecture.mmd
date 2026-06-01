@@ -1,0 +1,29 @@
+flowchart TB
+  subgraph Author["Author side"]
+    H["Agent runtime<br/>(Hermes / OpenClaude)"] --> CLI["atrium CLI<br/>sign + pin + register"]
+  end
+
+  subgraph OffChain["Off-chain"]
+    IPFS["IPFS / Pinata<br/>content-addressed body"]
+    IDX["Indexer<br/>SQLite + REST"]
+  end
+
+  subgraph OnChain["Base (on-chain)"]
+    REG["AtriumRegistry<br/>skills, payments, attestations"]
+    USDC["USDC (ERC-20)"]
+  end
+
+  subgraph Consumer["Consumer side"]
+    MCP["MCP server"]
+    WEB["Web app"]
+  end
+
+  CLI -->|pin body| IPFS
+  CLI -->|registerSkill| REG
+  REG -->|events| IDX
+  IPFS -->|lazy fetch + cache| IDX
+  IDX --> MCP
+  IDX --> WEB
+  MCP -->|invokeSkill + USDC| REG
+  WEB -->|invokeSkill + USDC| REG
+  REG <-->|transferFrom / transfer| USDC

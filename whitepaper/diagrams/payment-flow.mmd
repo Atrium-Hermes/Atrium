@@ -1,0 +1,21 @@
+sequenceDiagram
+    actor C as Consumer
+    participant U as USDC
+    participant R as AtriumRegistry
+    participant T as Treasury (pull)
+    participant P as Parent creator (pull)
+    participant K as Skill creator (pull)
+
+    C->>U: approve(R, price)
+    C->>R: invokeSkill(skillId)
+    R->>U: transferFrom(C, R, price)
+    Note over R: protocolCut = price * feeBps / 10000
+    R->>T: withdrawable[treasury] += protocolCut
+    Note over R: distributable = price - protocolCut
+    loop each declared parent i
+        R->>P: withdrawable[parent_i] += distributable * bps_i / 10000
+    end
+    R->>K: withdrawable[creator] += remainder
+    Note over R,K: sum of credits == price (conservation)
+    K-->>R: withdraw()
+    R-->>K: transfer(creator, amount)
