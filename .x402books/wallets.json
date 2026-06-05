@@ -1,0 +1,40 @@
+{
+  "agent": "Atrium",
+  "project": "Atrium",
+  "ecosystem": "Base",
+  "website": "https://atriumhermes.tech",
+  "x": "@atriumhermes",
+  "github": "@Atrium-Hermes",
+  "wallets": [
+    {
+      "address": "0x45D16139030e43C4efca91F07e144C29F8F46F02",
+      "chain": "base",
+      "role": "treasury",
+      "verification_method": "repo_manifest",
+      "evidence_url": "https://basescan.org/address/0x45D16139030e43C4efca91F07e144C29F8F46F02",
+      "notes": "Protocol treasury, owner and deployer. Receives the 2.5% protocol fee on every skill invocation and deployed AtriumRegistry, $ATRIUM, and the stake-attestation contract.",
+      "last_updated": "2026-06-05",
+      "active": true
+    },
+    {
+      "address": "0xA713c88927523279B874640003Ed697e509732a7",
+      "chain": "base",
+      "role": "payment_receiver",
+      "verification_method": "repo_manifest",
+      "evidence_url": "https://basescan.org/address/0xA713c88927523279B874640003Ed697e509732a7",
+      "notes": "AtriumRegistry (verified). Escrows USDC paid per skill invocation and routes it to creators and parent-skill royalties via a pull-payment pattern.",
+      "last_updated": "2026-06-05",
+      "active": true
+    },
+    {
+      "address": "0x61701f785fA8Ff6AD1D4Ad4ec5490cDbC910BBA3",
+      "chain": "base",
+      "role": "token_contract",
+      "verification_method": "repo_manifest",
+      "evidence_url": "https://basescan.org/token/0x61701f785fA8Ff6AD1D4Ad4ec5490cDbC910BBA3",
+      "notes": "$ATRIUM — coordination/stake token on Base. Burned to spawn Atrium-native agents and staked to back benchmark attestations.",
+      "last_updated": "2026-06-05",
+      "active": true
+    }
+  ]
+}
